@@ -2,4 +2,9 @@
     <string name="app_name">TestF</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="moreInfo">More Info</string>
+    <string name="city">Riyadh</string>
+    <string name="title">App developer</string>
+    <string name="info">Improve our overall application and continuously find ways to advance our apps</string>
+    <string name="hint"></string>
 </resources>
