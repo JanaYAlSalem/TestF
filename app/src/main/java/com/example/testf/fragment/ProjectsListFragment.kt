@@ -19,31 +19,25 @@ import com.google.firebase.ktx.Firebase
 class ProjectsListFragment : Fragment() {
 
     private val listviewModel: ProjectListViewModel by activityViewModels()
-//    lateinit var binding : FragmentProjectsListBinding
+    lateinit var binding : FragmentProjectsListBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
 
-        Log.e("TAG", "onViewCreated: ${listviewModel.getProjectFromFireStore()}", )
+    override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    listviewModel.ibraFunB()
+    }
 
-        val binding = FragmentProjectsListBinding.inflate(inflater)
-        binding.lifecycleOwner = this
-        binding.projectViewModel = listviewModel
-        binding.itemOnRecycle.adapter = ItemListAdapter()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+         binding = FragmentProjectsListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        listviewModel.getProjectItem()
-    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("TAG", "onViewCreated: ${listviewModel.getProjectFromFireStore()}", )
-        Log.e("TAG", "onViewCreated: 123", )
+        binding.lifecycleOwner = this
+        binding.projectViewModel = listviewModel
+        binding.itemOnRecycle.adapter = ItemListAdapter()
     }
 
 
