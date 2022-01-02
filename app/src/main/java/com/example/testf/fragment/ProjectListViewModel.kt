@@ -35,7 +35,7 @@ class ProjectListViewModel : ViewModel()  {
     } // end getProjectItem fun
 
 
-    private suspend fun ibraFunA (): Flow<Project> = callbackFlow {
+    private suspend fun FunA (): Flow<Project> = callbackFlow {
         val fireBaseDb = FirebaseFirestore.getInstance()
 
         fireBaseDb.collection("projects")
@@ -64,9 +64,9 @@ class ProjectListViewModel : ViewModel()  {
         }
     }
 
-     fun ibraFunB () {
+     fun FunB () {
          viewModelScope.launch {
-             ibraFunA().collect{
+             FunA().collect{
                  allProjects.add(it)
              }
 

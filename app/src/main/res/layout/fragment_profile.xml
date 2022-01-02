@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.AddProjectFragment"
+    tools:context=".fragment.ProfileFragment"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="AddProjectFragment"
-            type="com.example.testf.fragment.AddProjectFragment" />
+            name="ProfileFragment"
+            type="com.example.testf.fragment.ProfileFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
         android:padding="24dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/titleOfProject_lay"
+            android:id="@+id/firstNameProfile_lay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="76dp"
@@ -26,15 +26,15 @@
             app:layout_constraintTop_toTopOf="parent" >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/titleOfProject"
+                android:id="@+id/firstNameProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Title"
+                android:hint="First Name"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/descriptionOfProject_lay"
+            android:id="@+id/lastNameProfile_lay"
             android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -43,13 +43,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleOfProject_lay" >
+            app:layout_constraintTop_toBottomOf="@+id/firstNameProfile_lay" >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/descriptionOfProject"
+                android:id="@+id/lastNameProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="description"
+                android:hint="Last Name"
                 android:inputType="text"
                 />
 
@@ -57,30 +57,29 @@
 
 
         <EditText
-            android:id="@+id/locations"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/cvProfile"
+            android:layout_width="361dp"
+            android:layout_height="139dp"
             android:layout_marginTop="16dp"
             android:ems="10"
-            android:hint="locations"
+            android:hint="BIO"
             android:inputType="text"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descriptionOfProject_lay" />
+            app:layout_constraintTop_toBottomOf="@+id/lastNameProfile_lay" />
 
 
         <Button
-            android:id="@+id/add_btn"
+            android:id="@+id/save_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Add Ptoject"
+            android:layout_marginTop="96dp"
+            android:text="SAVE"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/locations" />
+            app:layout_constraintTop_toBottomOf="@+id/cvProfile" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

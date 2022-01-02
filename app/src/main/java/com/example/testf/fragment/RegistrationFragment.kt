@@ -1,6 +1,5 @@
 package com.example.testf.fragment
 
-// com.example.testf.fragment.RegistrationFragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -29,11 +28,7 @@ class RegistrationFragment : Fragment() {
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
         return binding?.root
     }
@@ -43,6 +38,7 @@ class RegistrationFragment : Fragment() {
         // on click register button
         binding!!.register.setOnClickListener {
             register()
+
         }
         binding!!.singIn.setOnClickListener {
             findNavController().navigate(R.id.registration_to_login)
@@ -58,7 +54,8 @@ class RegistrationFragment : Fragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this.context, "Register SuccessFull", Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.registration_to_login)
+                    findNavController().navigate(R.id.registration_to_profile)
+
                 } else {
                     Toast.makeText(context, task.exception?.message, Toast.LENGTH_SHORT).show()
                 }

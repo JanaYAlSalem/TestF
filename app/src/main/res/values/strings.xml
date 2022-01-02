@@ -7,4 +7,9 @@
     <string name="title">App developer</string>
     <string name="info">Improve our overall application and continuously find ways to advance our apps</string>
     <string name="hint"></string>
+    <string name="home">home</string>
+    <string name="person">person</string>
+    <string name="identity">identity</string>
+    <string name="add">add</string>
+    <string name="email">Email</string>
 </resources>

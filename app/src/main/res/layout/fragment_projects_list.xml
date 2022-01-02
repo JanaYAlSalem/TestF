@@ -21,11 +21,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/itemOnRecycle"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#D6D3D3"
             android:clipToPadding="false"
-            android:padding="7dp"
+            android:padding="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/projectsListFragment2">
+    app:startDestination="@id/projectsListFragment">
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.testf.fragment.RegistrationFragment"
@@ -12,6 +12,9 @@
         <action
             android:id="@+id/registration_to_login"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/registration_to_profile"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -24,6 +27,9 @@
         <action
             android:id="@+id/login_to_registration"
             app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/login_to_projectsList"
+            app:destination="@id/projectsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/addProjectFragment"
@@ -32,11 +38,20 @@
         tools:layout="@layout/fragment_add_project" >
         <action
             android:id="@+id/addProject_to_projectsList"
-            app:destination="@id/projectsListFragment2" />
+            app:destination="@id/projectsListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/projectsListFragment2"
+        android:id="@+id/projectsListFragment"
         android:name="com.example.testf.fragment.ProjectsListFragment"
         android:label="fragment_projects_list"
         tools:layout="@layout/fragment_projects_list" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.testf.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/profile_to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

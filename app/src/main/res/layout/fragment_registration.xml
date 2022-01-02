@@ -84,7 +84,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:clickable="true"
-            android:text="SignIn"
+            android:text="LogIn"
             android:contextClickable="true"
             android:textColor="#039BE5"
             android:textSize="20sp"

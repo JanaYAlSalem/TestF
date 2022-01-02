@@ -10,9 +10,8 @@ data class RequestProject (val reqId : Int ,
                            val stateOfRequest : RequestState)
 
 
-data class Profile (val userId : Int,
-                    val firstName : String,
-                    val lastName : String,
-                    val userImgeUrl : String)
+data class Profile (val firstName : String = "",
+                    val lastName : String = "",
+                    val cv : String = "")
 
 enum class RequestState { WAITING, ACCEPT, DECLINED}
