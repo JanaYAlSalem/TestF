@@ -13,7 +13,6 @@ import com.example.testf.model.Project
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: ArrayList<Project?>) {
     Log.e("TAG", "bindRecyclerView: $data")
-//    val c = listOf(Project("JJ","KKK","KK"))
     val adapter = recyclerView.adapter as ItemListAdapter
     adapter.submitList(data)
 }

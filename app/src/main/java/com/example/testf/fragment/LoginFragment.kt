@@ -26,7 +26,11 @@ class LoginFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         auth = Firebase.auth
+
+
     }
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -37,6 +41,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        isLogin()
 
         // on click singIn text
         binding!!.login.setOnClickListener {
@@ -62,7 +67,7 @@ class LoginFragment : Fragment() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this.context, "Logg in", Toast.LENGTH_LONG).show()
-                            findNavController().navigate(R.id.login_to_addProject)
+                            findNavController().navigate(R.id.login_to_projectsList)
                         } else {
                             Toast.makeText(context, task.exception?.message, Toast.LENGTH_SHORT).show()
                         }
@@ -71,6 +76,15 @@ class LoginFragment : Fragment() {
                 Toast.makeText(this.requireContext(), "Enter password", Toast.LENGTH_SHORT).show()
         }else
             Toast.makeText(this.requireContext(), "Enter Email", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun isLogin() {
+
+        val currentUser = Firebase.auth.currentUser
+
+        if (currentUser != null) {
+            findNavController().navigate(R.id.login_to_displayProfile)
+        }
     }
 
 }

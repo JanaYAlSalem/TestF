@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+   <layout xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       tools:context=".fragment.DetailsProjectFragment"
+       xmlns:tools="http://schemas.android.com/tools">
+       <data>
+           <variable
+               name="detailsProjectViewModel"
+               type="com.example.testf.fragment.ProjectListViewModel" />
+
+           <variable
+               name="ownerProfileViewModel"
+               type="com.example.testf.fragment.ProfileViewModel" />
+
+           <variable
+               name="DetailsProjectFragment"
+               type="com.example.testf.fragment.DetailsProjectFragment" />
+       </data>
+
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:padding="24dp">
+
+           <TextView
+               android:id="@+id/mameOfOwnerProject"
+               android:layout_width="175dp"
+               android:layout_height="47dp"
+               android:layout_marginTop="16dp"
+               android:text="@{ownerProfileViewModel.firstName}"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintHorizontal_bias="0.052"
+               app:layout_constraintStart_toEndOf="@+id/imageProfile"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <ImageView
+               android:id="@+id/imageProfile"
+               android:layout_width="60dp"
+               android:layout_height="69dp"
+               android:src="@drawable/ic_abstract_user"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <TextView
+               android:id="@+id/titleOfProject"
+               android:layout_width="120dp"
+               android:layout_height="38dp"
+               android:layout_marginStart="4dp"
+               android:layout_marginTop="36dp"
+               android:text="@{detailsProjectViewModel.title}"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
+
+           <TextView
+               android:id="@+id/descriptionOfProject"
+               android:layout_width="365dp"
+               android:layout_height="192dp"
+               android:layout_marginTop="12dp"
+               android:text="@{detailsProjectViewModel.description}"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/titleOfProject" />
+
+
+           <!-- region Workers Title-->
+           <!-- endregion -->
+
+
+           <!-- region join Button-->
+           <TextView
+               android:id="@+id/workers"
+               android:layout_width="143dp"
+               android:layout_height="29dp"
+               android:layout_alignParentEnd="true"
+               android:layout_marginStart="4dp"
+               android:layout_marginTop="72dp"
+               android:text="@string/workers"
+               android:textColor="@color/primaryText_01"
+               android:textStyle="bold"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/descriptionOfProject" />
+
+           <!-- endregion -->
+
+
+           <!-- region RecyclerView Button-->
+
+
+           <Button
+               android:id="@+id/joinToProject"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginEnd="16dp"
+               android:layout_marginBottom="24dp"
+               android:text="@string/req"
+               app:layout_constraintBottom_toTopOf="@+id/itemOfRequest"
+               app:layout_constraintEnd_toEndOf="parent" />
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/itemOfRequest"
+               android:layout_width="363dp"
+               android:layout_height="227dp"
+               android:layout_marginTop="16dp"
+               app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/workers"
+               app:layout_constraintVertical_bias="1.0"
+               tools:listitem="@layout/item_request" />
+
+           <TextView
+               android:id="@+id/city"
+               android:layout_width="59dp"
+               android:layout_height="22dp"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="24dp"
+               android:text="@{detailsProjectViewModel.location}"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/descriptionOfProject" />
+           <!-- endregion -->
+
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+   </layout>

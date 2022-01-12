@@ -3,23 +3,34 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/drawable/ic_abstract_user.xml" value="0.2786458333333333" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/activity_main.xml" value="0.2625" />
-        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_add_project.xml" value="0.176" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/dropdown_item.xml" value="0.1" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_add_project.xml" value="0.264" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_blank.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_details.xml" value="0.264" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_details_project.xml" value="0.2625" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_display_profile.xml" value="0.18922651933701656" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_item_of_list.xml" value="0.2625" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_list.xml" value="0.2625" />
-        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_login.xml" value="0.2484375" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_login.xml" value="0.264" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_profile.xml" value="0.2484375" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_projects_list.xml" value="0.1" />
-        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_registration.xml" value="0.2625" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_registration.xml" value="0.4" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_req.xml" value="0.2484375" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_request_dialog.xml" value="0.10462962962962963" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_singin.xml" value="0.2625" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_start.xml" value="0.2625" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/item.xml" value="0.2625" />
-        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/item_list.xml" value="0.2625" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/item_list.xml" value="0.6" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/item_request.xml" value="0.2625" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/popup_request.xml" value="0.2625" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/req_item.xml" value="0.2625" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.2625" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2786458333333333" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2786458333333333" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/xml/settings.xml" value="0.2625" />
       </map>
     </option>
   </component>

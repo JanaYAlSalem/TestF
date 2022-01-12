@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/projectsListFragment">
+
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.testf.fragment.RegistrationFragment"
@@ -30,6 +31,9 @@
         <action
             android:id="@+id/login_to_projectsList"
             app:destination="@id/projectsListFragment" />
+        <action
+            android:id="@+id/login_to_displayProfile"
+            app:destination="@id/displayProfileFragment2" />
     </fragment>
     <fragment
         android:id="@+id/addProjectFragment"
@@ -39,19 +43,59 @@
         <action
             android:id="@+id/addProject_to_projectsList"
             app:destination="@id/projectsListFragment" />
+        <action
+            android:id="@+id/addProject_to_login"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/projectsListFragment"
         android:name="com.example.testf.fragment.ProjectsListFragment"
-        android:label="fragment_projects_list"
-        tools:layout="@layout/fragment_projects_list" />
+        android:label="fragment_projects_list">
+        <action
+            android:id="@+id/projectsList_to_detailsProject"
+            app:destination="@id/detailsProjectFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.testf.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="userId"
+            app:argType="string" />
         <action
-            android:id="@+id/profile_to_login"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/profile_to_displayProfile"
+            app:destination="@id/displayProfileFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/displayProfileFragment2"
+        android:name="com.example.testf.fragment.DisplayProfileFragment"
+        android:label="fragment_display_profile"
+        tools:layout="@layout/fragment_display_profile" >
+        <action
+            android:id="@+id/displayProfile_to_profile"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/displayProfile_to_login"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_displayProfileFragment2_to_userPrefrencFragment"
+            app:destination="@id/userPrefrencFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsProjectFragment"
+        android:name="com.example.testf.fragment.DetailsProjectFragment"
+        android:label="fragment_details_project"
+        tools:layout="@layout/fragment_details_project" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="ownerId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/userPrefrencFragment"
+        android:name="com.example.testf.prefrence.UserPrefrencFragment"
+        android:label="UserPrefrencFragment" />
 </navigation>

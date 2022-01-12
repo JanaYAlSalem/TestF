@@ -14,16 +14,16 @@
         android:layout_height="match_parent"
         android:padding="24dp">
 
+        <!-- region FName-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/firstNameProfile_lay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="76dp"
+            android:layout_marginTop="60dp"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/firstNameProfile"
@@ -32,54 +32,103 @@
                 android:hint="First Name"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+        <!-- endregion -->
 
+        <!-- region LName-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/lastNameProfile_lay"
             android:layout_width="365dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="56dp"
             android:ems="10"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.521"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/firstNameProfile_lay" >
+            app:layout_constraintTop_toBottomOf="@+id/firstNameProfile_lay">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/lastNameProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Last Name"
-                android:inputType="text"
-                />
-
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+        <!-- endregion -->
 
+        <!-- region Majoring-->
 
-        <EditText
-            android:id="@+id/cvProfile"
-            android:layout_width="361dp"
-            android:layout_height="139dp"
-            android:layout_marginTop="16dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/majoringOfUser_lay"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="152dp"
             android:ems="10"
-            android:hint="BIO"
-            android:inputType="text"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.521"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lastNameProfile_lay" />
+            app:layout_constraintTop_toBottomOf="@+id/firstNameProfile_lay">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/majoringOfUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="majoringOfUser"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- endregion -->
+
+        <!-- region CV-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/cvProfile_lay"
+            android:layout_width="365dp"
+            android:layout_height="123dp"
+            android:layout_marginTop="44dp"
+            android:ems="10"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.478"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/majoringOfUser_lay">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cvProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Write a CV"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <!-- endregion-->
+
+        <!-- region save Btn-->
         <Button
             android:id="@+id/save_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="88dp"
             android:text="SAVE"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cvProfile" />
+            app:layout_constraintTop_toBottomOf="@+id/cvProfile_lay" />
+        <!-- endregion-->
+
+        <!-- region update Btn-->
+        <Button
+            android:id="@+id/update_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            android:text="Update"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.541"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvProfile_lay" />
+
+        <!-- endregion-->
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

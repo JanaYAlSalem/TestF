@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.RequestDialogFragment">
+
+
+    <!-- region requestForm Title-->
+    <TextView
+        android:id="@+id/requestForm"
+        android:layout_width="143dp"
+        android:layout_height="29dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/requestForm"
+        android:textColor="@color/primaryText_01"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!-- endregion -->
+
+    <!-- region Title Of Job-->
+    <EditText
+        android:id="@+id/titleOfJob"
+        android:layout_width="323dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/requestForm" />
+    <!-- endregion -->
+
+    <!-- region describe Of Job-->
+    <EditText
+        android:id="@+id/describeOfJob"
+        android:layout_width="320dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleOfJob" />
+    <!-- endregion -->
+
+
+    <!-- region makeReq Button-->
+    <Button
+        android:id="@+id/makeReq"
+        android:layout_width="109dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="280dp"
+        android:text="@string/makeReq"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.854"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/describeOfJob"
+        app:layout_constraintVertical_bias="1.0" />
+    <!-- endregion -->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

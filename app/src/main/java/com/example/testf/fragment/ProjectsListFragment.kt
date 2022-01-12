@@ -1,28 +1,30 @@
 package com.example.testf.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.testf.adapter.ItemListAdapter
 import com.example.testf.databinding.FragmentProjectsListBinding
+import kotlinx.coroutines.launch
 
 class ProjectsListFragment : Fragment() {
 
-    private val listviewModel: ProjectListViewModel by activityViewModels()
+    private val listviewModel: ProjectListViewModel by viewModels()
     private var _binding : FragmentProjectsListBinding? = null
     val binding get() = _binding
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
          _binding = FragmentProjectsListBinding.inflate(inflater, container, false)
-        listviewModel.FunB()
 
         return binding?.root
     }
@@ -30,10 +32,27 @@ class ProjectsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.lifecycleOwner = this
+        val adapter = ItemListAdapter()
+
+        binding?.lifecycleOwner = viewLifecycleOwner
         binding?.projectViewModel = listviewModel
-        binding?.itemOnRecycle?.adapter = ItemListAdapter()
+        binding?.itemOnRecycle?.adapter = adapter
+
+
+
+        lifecycleScope.launch{
+            repeatOnLifecycle(Lifecycle.State.RESUMED){
+                listviewModel.projectsStateFlow.collect{
+                    Log.d("TAG", "onViewCreated:$it ")
+                    adapter.submitList(it)
+
+                }
+            }
+        }
+        listviewModel.FunB()
     }
+
+
 
 
 
