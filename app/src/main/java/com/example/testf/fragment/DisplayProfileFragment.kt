@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.testf.R
 import com.example.testf.adapter.ItemListAdapter
+import com.example.testf.adapter.ItemListOnProfileAdapter
 import com.example.testf.databinding.FragmentDisplayProfileBinding
 import com.example.testf.model.Profile
 import com.example.testf.model.Project
@@ -66,38 +67,34 @@ class DisplayProfileFragment : Fragment() {
             findNavController().navigate(R.id.displayProfile_to_login)
 
         }
+
         //onViewCreated
         profileViewModel.cv.observe(viewLifecycleOwner, { binding!!.bioInfo.setText(it) })
 
         profileViewModel.fullName.observe(viewLifecycleOwner, { binding!!.userFullName.setText(it) })
 
-        val adapter = ItemListAdapter()
-        adapter.submitList(listTest)
+        val adapter = ItemListOnProfileAdapter()
+//        adapter.submitList(listTest)
+        binding?.lifecycleOwner = viewLifecycleOwner
+        binding?.projectViewModel = projectviewModel
+        binding?.itemOfProject?.adapter = adapter
+
         Log.e("TAG", "onViewCreated: $listTest", )
         Log.e("TAG", "onViewCreated: ${profileViewModel.currentUserID()}", )
         Log.e("TAG", "onViewCreated: ${projectviewModel.userId.value}", )
         Log.e("TAG", "onViewCreated: ${projectviewModel.projectsStateFlow.value}", )
-        binding?.lifecycleOwner = viewLifecycleOwner
-        binding?.projectViewModel = projectviewModel
-        binding?.itemOfReq?.adapter = adapter
+
+        projectviewModel.getProjectInformation(profileViewModel.currentUserID())
 
 
-
-//        lifecycleScope.launch {
-//            repeatOnLifecycle(Lifecycle.State.RESUMED) {
-//                listviewModel.projectsStateFlow.collect {
-//                    if (listviewModel.userId == profileViewModel.lastName) {
-//                        Log.e(
-//                            "TAG",
-//                            "onViewCreated: ${listviewModel.userId} AND : ${profileViewModel.lastName}",
-//                        )
-//                        adapter.submitList(it)
-//                    }
-//                }
-//            }
-//        }
-//        listviewModel.FunB()
-//    }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                projectviewModel.projectsUser.collect {
+                        adapter.submitList(it)
+                }
+            }
+        }
+        projectviewModel.FunD()
     }
 
 }

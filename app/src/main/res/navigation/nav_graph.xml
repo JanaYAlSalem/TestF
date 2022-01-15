@@ -81,6 +81,9 @@
         <action
             android:id="@+id/displayProfile_to_userPrefrenc"
             app:destination="@id/userPrefrencFragment" />
+        <action
+            android:id="@+id/displayProfile_to_requestList"
+            app:destination="@id/requestListFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsProjectFragment"
@@ -107,4 +110,15 @@
             android:id="@+id/requestDialog_to_detailsProject"
             app:destination="@id/detailsProjectFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/requestListFragment"
+        android:name="com.example.testf.fragment.RequestListFragment"
+        android:label="RequestListFragment" >
+        <argument
+            android:name="projectID"
+            app:argType="string" />
+        <argument
+            android:name="projectName"
+            app:argType="string" />
+    </fragment>
 </navigation>

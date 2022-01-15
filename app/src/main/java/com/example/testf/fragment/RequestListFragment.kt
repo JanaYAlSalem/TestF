@@ -16,13 +16,21 @@ import com.example.testf.model.RequestProject
 
 class RequestListFragment : Fragment() {
 
-    private val reqListViewModel: RequestProjectViewModel by viewModels()
     private var _binding : FragmentRequestListBinding? = null
     val binding get() = _binding
 
+    private val reqListViewModel: RequestProjectViewModel by viewModels()
     val reqList = mutableListOf<RequestProject>(RequestProject("HERE I'm", "DES","Riyadh"))
 
+    lateinit var projectName: String
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments.let {
+            projectName = it?.getString("projectName").toString()
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -35,7 +43,7 @@ class RequestListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // title page
-        (activity as AppCompatActivity).supportActionBar?.title = "Home"
+        (activity as AppCompatActivity).supportActionBar?.title = projectName
         val adapter = ItemReqAdapter()
 
         binding?.lifecycleOwner = viewLifecycleOwner

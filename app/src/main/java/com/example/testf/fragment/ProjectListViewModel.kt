@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.testf.model.Project
 import com.example.testf.model.RequestProject
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -22,7 +23,8 @@ class ProjectListViewModel : ViewModel()  {
     private val _projectsStateFlow = MutableStateFlow<List<Project?>>(emptyList())
     val projectsStateFlow: StateFlow<List<Project?>> = _projectsStateFlow.asStateFlow()
 
-
+    private val _projectsUser = MutableStateFlow<List<Project?>>(emptyList())
+    val projectsUser: StateFlow<List<Project?>> = _projectsUser.asStateFlow()
 
     private var _title = MutableLiveData<String>()
     val title: MutableLiveData<String> get() = _title
@@ -101,37 +103,80 @@ class ProjectListViewModel : ViewModel()  {
                                 _location.value = documentSnapshot.data?.get("location").toString()
                                 _userId.value = documentSnapshot.data?.get("userId").toString()
                                 _projectId.value = documentSnapshot.data?.get("projectId").toString()
-//                                _listRequestProject.value = getReqList()
-                                Log.e("TAG", "getItemInformation: ${projectId.value}", )
                             }
                         }
                     })
             }
     }
 
-//fun getReqList(projectId : String) : List<RequestProject> {
-//
-//    viewModelScope.launch {
-//        Firebase.firestore.collection("projects").document(projectId)
-//            .get()
-//            .addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
-//                if (task.isSuccessful) {
-//                    for (documentSnapshot in task.result.documents) {
-//                        _title.value = documentSnapshot.data?.get("title").toString()
-//                        _description.value = documentSnapshot.data?.get("description").toString()
-//                        _location.value = documentSnapshot.data?.get("location").toString()
-//                        _userId.value = documentSnapshot.data?.get("userId").toString()
-//                        _projectId.value = documentSnapshot.data?.get("projectId").toString()
-//                        _listRequestProject.value = getReqList()
-//                        Log.e("TAG", "getItemInformation: ${projectId.value}", )
-//                    }
-//                }
-//            })
-//    }
-//
-//    return reqList
-//
-//}
+
+    // title ,description , location,userId,listRequestProject
+    fun getProjectInformation(userId: String) : List<Project?> {
+        viewModelScope.launch {
+            Firebase.firestore.collection("projects").whereEqualTo("userId", userId)
+                .get()
+                .addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
+                    if (task.isSuccessful) {
+                        for (documentSnapshot in task.result.documents) {
+                            Log.e("TAG", "getItemInformation: ${task.result.documents}", )
+                            _title.value = documentSnapshot.data?.get("title").toString()
+                            _description.value = documentSnapshot.data?.get("description").toString()
+                            _location.value = documentSnapshot.data?.get("location").toString()
+                            _userId.value = documentSnapshot.data?.get("userId").toString()
+                            _projectId.value = documentSnapshot.data?.get("projectId").toString()
+
+                            _projectsUser.value = mutableListOf(Project(_title.value!! , _description.value!!))
+                            Log.e("TAG", "HERE : ${_projectsUser.value}", )
+                        }
+                    }
+                })
+        }
+
+        return projectsUser.value!!
+
+    }
+
+
+
+    private suspend fun FunC (): Flow<List<Project>> = callbackFlow {
+        val fireBaseDb = FirebaseFirestore.getInstance()
+val id = Firebase.auth.currentUser!!.uid
+        fireBaseDb.collection("projects").whereEqualTo("userId", id)
+            .addSnapshotListener { snapshot, exception ->
+                if (exception != null) {
+                    return@addSnapshotListener
+                }
+                var list = mutableListOf<Project>()
+                snapshot?.documents?.forEach {
+                    if (it.exists()) {
+                        val projectList = it.toObject(Project::class.java)
+                        list.add(projectList!!)
+                    } else {
+                    }
+
+                }
+
+
+                trySend(list)
+
+
+            }
+
+        awaitClose {
+
+        }
+    }
+
+    fun FunD () {
+        viewModelScope.launch {
+            FunC().collect{ list ->
+                _projectsUser.update{list}
+            }
+
+        }
+
+    }
+
 
 
 }  // end ProjectListViewModel CLASS
