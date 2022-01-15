@@ -39,6 +39,9 @@ class ProjectListViewModel : ViewModel()  {
     private var _userId = MutableLiveData<String>()
     val userId: MutableLiveData<String> get() = _userId
 
+    //projectId
+    private var _projectId = MutableLiveData<String>()
+    val projectId: MutableLiveData<String> get() = _projectId
 
     private var _listRequestProject = MutableLiveData<List<RequestProject>?>()
     val listRequestProject: MutableLiveData<List<RequestProject>?> get() = _listRequestProject
@@ -58,9 +61,7 @@ class ProjectListViewModel : ViewModel()  {
                     if (it.exists()) {
                         val projectList = it.toObject(Project::class.java)
                         list.add(projectList!!)
-                        //    Log.d("TAG", "Current data: ${it.data}")
                     } else {
-                        //      Log.d("TAG", "Current data: null")
                     }
 
                 }
@@ -79,7 +80,6 @@ class ProjectListViewModel : ViewModel()  {
      fun FunB () {
          viewModelScope.launch {
              FunA().collect{ list ->
-                 Log.d("TAG", "FunB: $list")
                  _projectsStateFlow.update{list}
              }
 
@@ -100,12 +100,39 @@ class ProjectListViewModel : ViewModel()  {
                                 _description.value = documentSnapshot.data?.get("description").toString()
                                 _location.value = documentSnapshot.data?.get("location").toString()
                                 _userId.value = documentSnapshot.data?.get("userId").toString()
-
-                                Log.e("TAG", "getItemInformation: ${_title.value}", )
+                                _projectId.value = documentSnapshot.data?.get("projectId").toString()
+//                                _listRequestProject.value = getReqList()
+                                Log.e("TAG", "getItemInformation: ${projectId.value}", )
                             }
                         }
                     })
             }
     }
+
+//fun getReqList(projectId : String) : List<RequestProject> {
+//
+//    viewModelScope.launch {
+//        Firebase.firestore.collection("projects").document(projectId)
+//            .get()
+//            .addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
+//                if (task.isSuccessful) {
+//                    for (documentSnapshot in task.result.documents) {
+//                        _title.value = documentSnapshot.data?.get("title").toString()
+//                        _description.value = documentSnapshot.data?.get("description").toString()
+//                        _location.value = documentSnapshot.data?.get("location").toString()
+//                        _userId.value = documentSnapshot.data?.get("userId").toString()
+//                        _projectId.value = documentSnapshot.data?.get("projectId").toString()
+//                        _listRequestProject.value = getReqList()
+//                        Log.e("TAG", "getItemInformation: ${projectId.value}", )
+//                    }
+//                }
+//            })
+//    }
+//
+//    return reqList
+//
+//}
+
+
 }  // end ProjectListViewModel CLASS
 

@@ -48,26 +48,12 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/descriptionOfProject"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="151dp"
                 android:hint="description"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
-<!--        <EditText-->
-<!--            android:id="@+id/locations"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:ems="10"-->
-<!--            android:hint="locations"-->
-<!--            android:inputType="text"-->
-<!--            android:minHeight="48dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.5"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/descriptionOfProject_lay" />-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/locations"

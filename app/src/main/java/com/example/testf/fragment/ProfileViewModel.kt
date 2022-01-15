@@ -18,12 +18,10 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel : ViewModel() {
 
-    //   Profile (userId, firstName ,lastName, cv)
-    private val _firstName = MutableLiveData<String>()
-    val firstName: MutableLiveData<String> get() = _firstName
+    //   Profile (userId, firstName, cv)
+    private val _fullName = MutableLiveData<String>()
+    val fullName: MutableLiveData<String> get() = _fullName
 
-    private val _lastName = MutableLiveData<String>()
-    val lastName: MutableLiveData<String> get() = _lastName
 
     private val _majoringOfUser = MutableLiveData<String>()
     val majoringOfUser: MutableLiveData<String> get() = _majoringOfUser
@@ -62,8 +60,7 @@ class ProfileViewModel : ViewModel() {
                 .addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
                     if (task.isSuccessful) {
                         for (documentSnapshot in task.result.documents) {
-                            _firstName.value = documentSnapshot.data?.get("firstName").toString()
-                            _lastName.value = documentSnapshot.data?.get("lastName").toString()
+                            _fullName.value = documentSnapshot.data?.get("fullName").toString()
                             _majoringOfUser.value = documentSnapshot.data?.get("majoringOfUser").toString()
                             _cv.value = documentSnapshot.data?.get("cv").toString()
                         }
@@ -81,8 +78,7 @@ class ProfileViewModel : ViewModel() {
                 .addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
                     if (task.isSuccessful) {
                         for (documentSnapshot in task.result.documents) {
-                            _firstName.value = documentSnapshot.data?.get("firstName").toString()
-                            _lastName.value = documentSnapshot.data?.get("lastName").toString()
+                            _fullName.value = documentSnapshot.data?.get("fullName").toString()
                             _majoringOfUser.value = documentSnapshot.data?.get("majoringOfUser").toString()
                             _cv.value = documentSnapshot.data?.get("cv").toString()
                         }

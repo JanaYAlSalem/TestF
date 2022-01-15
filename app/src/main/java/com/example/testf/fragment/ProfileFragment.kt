@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
@@ -44,7 +45,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding!!.updateBtn.isVisible = false
+        (activity as AppCompatActivity).supportActionBar?.title = "Profile"
 
         displayInfo ()
 
@@ -61,11 +62,8 @@ class ProfileFragment : Fragment() {
     // region 1- check if Info NOT empty
     private fun checkInfo (profile: Profile): Boolean{
 
-        if (profile.firstName.isEmpty()) {
+        if (profile.fullName.isEmpty()) {
             Toast.makeText(this.requireContext(), "Please Enter First Name", Toast.LENGTH_SHORT).show()
-            return false
-        } else if (profile.lastName.isEmpty()) {
-            Toast.makeText(this.requireContext(), "Please Enter Last Name", Toast.LENGTH_SHORT).show()
             return false
         } else if (profile.majoringOfUser.isEmpty()) {
             Toast.makeText(this.requireContext(), "Please Enter Your Major", Toast.LENGTH_SHORT).show()
@@ -88,9 +86,8 @@ class ProfileFragment : Fragment() {
         val Majoring = binding!!.majoringOfUser.text.toString()
         val cv = binding!!.cvProfile.text.toString()
 
-        binding!!.saveBtn.isEnabled = true
-        //   val project = Project(Id ,firstName, lastName , cv)
-        return Profile(userId, firstName, lastName,Majoring, cv)
+        //   val project = Project(Id ,fullName, Majoring , cv)
+        return Profile(userId, "$firstName $lastName",Majoring, cv)
     }
     //endregion
 
@@ -111,91 +108,11 @@ class ProfileFragment : Fragment() {
 
     // region 4- get Info to Display
     private fun displayInfo () {
-        profileViewModel.firstName.observe(viewLifecycleOwner, { binding!!.firstNameProfile.setText(it) })
-
-        profileViewModel.lastName.observe(viewLifecycleOwner, { binding!!.lastNameProfile.setText(it) })
+        profileViewModel.fullName.observe(viewLifecycleOwner, { binding!!.firstNameProfile.setText(it) })
 
         profileViewModel.majoringOfUser.observe(viewLifecycleOwner, { binding!!.majoringOfUser.setText(it) })
 
         profileViewModel.cv.observe(viewLifecycleOwner, { binding!!.cvProfile.setText(it) })
-    }
-    //endregion
-
-
-    // region test FUN
-    private fun checkUserInfo() {
-        /// test TWO
-            val userId = profileViewModel.currentUserID()
-        profilesCollectionRef.whereEqualTo("userId", userId).get()
-            .addOnCompleteListener{ task ->
-                if (task.isSuccessful) {
-                    Log.e("TAG", "checkUserInfo: COMPLETE isSuccessful", )
-                    Log.e("TAG", "checkUserInfo: $userId", )
-                    Log.e("TAG", "checkUserInfo: $task", )
-                    binding!!.saveBtn.isVisible = false
-                    binding!!.updateBtn.isVisible = true
-                }else {
-                    Log.e("TAG", "checkUserInfo: COMPLETE is NOT Successful", )
-                    binding!!.saveBtn.isVisible = true
-                    binding!!.updateBtn.isVisible = false
-                }
-            }
-            .addOnFailureListener{
-                Log.e("TAG", "checkUserInfo: FAILURE", )
-                binding!!.saveBtn.isVisible = true
-                binding!!.updateBtn.isVisible = false
-            }
-
-//                Firebase.firestore.collection("profiles").whereEqualTo("userId", userId).get()
-//                    .addOnCompleteListener{ task ->
-//                        if (task.isSuccessful) {
-//                            Log.e("TAG", "checkUserInfo: COMPLETE isSuccessful", )
-//                            binding!!.saveBtn.isVisible = false
-//                            binding!!.updateBtn.isVisible = true
-//                        }else {
-//                            Log.e("TAG", "checkUserInfo: COMPLETE is NOT Successful", )
-//                            binding!!.saveBtn.isVisible = true
-//                            binding!!.updateBtn.isVisible = false
-//                        }
-//                    }
-//                    .addOnFailureListener{
-//                        Log.e("TAG", "checkUserInfo: FAILURE", )
-//                        binding!!.saveBtn.isVisible = true
-//                        binding!!.updateBtn.isVisible = false
-//                    }
-    }
-
-    //        FirebaseFirestore.getInstance().collection("profiles").whereEqualTo("userId",userID).get()
-//            .addOnCompleteListener { task ->
-//                if (task.isSuccessful){
-//                    for (doc in task.result.documents){
-//                    Log.e("TAG", "getIdDec ${doc.data!!.get("userID")}")}
-//
-//                    binding!!.saveBtn.isVisible = false
-//                    binding!!.updateBtn.isVisible = true
-//                } else {
-//                    binding!!.saveBtn.isVisible = true
-//                    binding!!.updateBtn.isVisible = false
-//                }
-//
-//
-//            }
-
-
-//
-//    for (doc in task.result.documents)
-//    if(currentUserID == doc.data!!.get("userId"))
-//    binding!!.saveBtn.isVisible = false
-//    else
-//    binding!!.updateBtn.isVisible = false
-//                         Log.e("TAG", "getIdDec ${doc.data!!.get("userId")}")
-
-
-    private fun update() {
-        var profile = getProfileInfo()
-
-        profilesCollectionRef.document(profile.userId).update("firstName", profile.firstName, "lastName",profile.lastName, "cv", profile.cv)
-
     }
     //endregion
 

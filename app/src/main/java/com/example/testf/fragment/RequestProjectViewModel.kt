@@ -11,9 +11,10 @@ import com.example.testf.model.RequestState
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class RequestProjectViewModel : ViewModel()  {
+class RequestProjectViewModel : ViewModel() {
 
-    private val RequestCollectionRef = Firebase.firestore.collection("Requests")
+    private val requestCollectionRef = Firebase.firestore.collection("requests")
+    private val projectCollectionRef = Firebase.firestore.collection("projects")
 
 
     // RequestProject (reqId,userId,projectId,jobTitle,description,stateOfRequest)
@@ -36,27 +37,40 @@ class RequestProjectViewModel : ViewModel()  {
     private val _stateOfRequest = MutableLiveData<RequestState>()
     val stateOfRequest: MutableLiveData<RequestState> get() = _stateOfRequest
 
-    fun makeReq (reqItem : RequestProject) {
-        RequestCollectionRef.add(reqItem)
+
+    fun makeReq(reqItem: RequestProject) {
+        requestCollectionRef.add(reqItem)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    setRequestIdDocument(task.result.id)
+                    setRequestIdDocument(reqItem, task.result.id)
+
                 }
             }
     }
 
 
-    // region 5- update a item by add id Document
-    private fun setRequestIdDocument(documentId: String) {
+    // region update a item by add id Document
+    private fun setRequestIdDocument(reqItem: RequestProject, documentId: String) {
         val reqDetails = mapOf("reqId" to documentId)
 
-        RequestCollectionRef.document(documentId)
+        requestCollectionRef.document(documentId)
             .update(reqDetails)
             .addOnCompleteListener {
-                Log.e("TAG", "setProjectIdDocument: ", )
+                // add req
+//                addReq(reqItem, reqItem.projectId)
+
             }
 
     }
     //endregion
+
+    private fun addReq(reqItem: RequestProject, projectDocumentId: String) {
+        val request = mapOf("listRequestProject" to reqItem)
+
+        projectCollectionRef.document(projectDocumentId).update(request)
+            .addOnCompleteListener {
+                Log.e("TAG", "addReq: REQ IS ADD TO LIST $projectDocumentId and $request")
+            }
+    }
 
 }

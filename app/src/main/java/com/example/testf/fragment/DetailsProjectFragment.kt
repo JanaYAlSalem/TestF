@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import com.example.testf.databinding.FragmentDetailsProjectBinding
 
@@ -20,6 +21,7 @@ class DetailsProjectFragment : Fragment() {
 
     lateinit var documentId: String
     lateinit var ownerId: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +45,8 @@ class DetailsProjectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as AppCompatActivity).supportActionBar?.title = "Details Project"
+
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             detailsProjectViewModel = projectViewModel
@@ -53,21 +57,13 @@ class DetailsProjectFragment : Fragment() {
         }
 
         binding!!.joinToProject.setOnClickListener {
-            var requestDialog = RequestDialogFragment()
+//            var action = DetailsProjectFragmentDirections
+//                .actionDetailsProjectFragmentToRequestDialogFragment(projectViewModel.projectId.toString())
+//            findNavController().navigate(action)
+
+            var requestDialog = RequestDialogFragment(projectViewModel.projectId.value!!)
             requestDialog.show(childFragmentManager, "requestDialog")
         }
-
-
-    }
-
-
-    //  Display info
-    //endregion
-
-    private fun getOwnerProfile () {
-        profileViewModel.getOwnerProfilrByUserId(projectViewModel.userId.toString())
-
-        profileViewModel.firstName.observe(viewLifecycleOwner, { binding!!.mameOfOwnerProject.setText(it) })
 
 
     }
