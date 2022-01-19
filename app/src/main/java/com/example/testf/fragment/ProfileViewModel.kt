@@ -1,13 +1,9 @@
 package com.example.testf.fragment
 
-import android.util.Log
-import androidx.lifecycle.LiveData
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
-import com.example.testf.R
-import com.example.testf.model.Profile
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -29,6 +25,19 @@ class ProfileViewModel : ViewModel() {
     private val _cv = MutableLiveData<String>()
     val cv: MutableLiveData<String> get() = _cv
 
+
+    private val _fullNameUser = MutableLiveData<String>()
+    val fullNameUser: MutableLiveData<String> get() = _fullNameUser
+
+
+    private val _majoringOfUserProfile = MutableLiveData<String>()
+    val majoringOfUserProfile: MutableLiveData<String> get() = _majoringOfUserProfile
+
+    private val _cvUser = MutableLiveData<String>()
+    val cvUser: MutableLiveData<String> get() = _cvUser
+
+
+
     init {
     getProfilrByUserId()
     }
@@ -36,20 +45,15 @@ class ProfileViewModel : ViewModel() {
 
     fun isLogin(): Boolean {
         val currentUser = Firebase.auth.currentUser
-
         if (currentUser != null) {
             return true
         } else
             return false
     }
 
-    fun singOut() {
-        FirebaseAuth.getInstance().signOut()
-    }
+    fun singOut() = FirebaseAuth.getInstance().signOut()
 
-    fun currentUserID(): String {
-        return Firebase.auth.currentUser!!.uid
-    }
+    fun currentUserID(): String = Firebase.auth.currentUser!!.uid
 
 
     fun getProfilrByUserId() {
@@ -78,9 +82,9 @@ class ProfileViewModel : ViewModel() {
                 .addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
                     if (task.isSuccessful) {
                         for (documentSnapshot in task.result.documents) {
-                            _fullName.value = documentSnapshot.data?.get("fullName").toString()
-                            _majoringOfUser.value = documentSnapshot.data?.get("majoringOfUser").toString()
-                            _cv.value = documentSnapshot.data?.get("cv").toString()
+                            _fullNameUser.value = documentSnapshot.data?.get("fullName").toString()
+                            _majoringOfUserProfile.value = documentSnapshot.data?.get("majoringOfUser").toString()
+                            _cvUser.value = documentSnapshot.data?.get("cv").toString()
                         }
                     }
                 })

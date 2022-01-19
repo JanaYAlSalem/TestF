@@ -54,6 +54,9 @@
         <action
             android:id="@+id/projectsList_to_detailsProject"
             app:destination="@id/detailsProjectFragment" />
+        <action
+            android:id="@+id/projectsList_self"
+            app:destination="@id/projectsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -96,6 +99,9 @@
         <argument
             android:name="ownerId"
             app:argType="string" />
+        <action
+            android:id="@+id/detailsProject_to_detailsProfile"
+            app:destination="@id/detailsProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/userPrefrencFragment"
@@ -119,6 +125,30 @@
             app:argType="string" />
         <argument
             android:name="projectName"
+            app:argType="string" />
+        <action
+            android:id="@+id/requestList_to_stateDialog"
+            app:destination="@id/stateDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsProfileFragment"
+        android:name="com.example.testf.fragment.DetailsProfileFragment"
+        android:label="fragment_details_profile"
+        tools:layout="@layout/fragment_details_profile" >
+        <argument
+            android:name="UserId"
+            app:argType="string" />
+        <action
+            android:id="@+id/detailsProfile_to_detailsProject"
+            app:destination="@id/detailsProjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stateDialogFragment"
+        android:name="com.example.testf.fragment.StateDialogFragment"
+        android:label="fragment_state_dialog"
+        tools:layout="@layout/fragment_state_dialog" >
+        <argument
+            android:name="ReqID"
             app:argType="string" />
     </fragment>
 </navigation>

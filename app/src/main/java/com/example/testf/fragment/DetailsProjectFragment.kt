@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.testf.databinding.FragmentDetailsProjectBinding
 
 
@@ -45,7 +47,9 @@ class DetailsProjectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.title = "Details Project"
+        (activity as AppCompatActivity).supportActionBar?.title = "Details Project ${projectViewModel.title.value}"
+
+        displayInfo ()
 
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -53,20 +57,28 @@ class DetailsProjectFragment : Fragment() {
             ownerProfileViewModel = profileViewModel
             detailsProjectFragment = this@DetailsProjectFragment
             projectViewModel.getItemInformation(documentId)
-            profileViewModel.getOwnerProfilrByUserId(ownerId)
         }
 
         binding!!.joinToProject.setOnClickListener {
-//            var action = DetailsProjectFragmentDirections
-//                .actionDetailsProjectFragmentToRequestDialogFragment(projectViewModel.projectId.toString())
-//            findNavController().navigate(action)
 
             var requestDialog = RequestDialogFragment(projectViewModel.projectId.value!!)
             requestDialog.show(childFragmentManager, "requestDialog")
         }
 
+        // detailsProject_to_detailsProfile
+        binding!!.nameOfOwnerProject.setOnClickListener{
+            var action = DetailsProjectFragmentDirections.detailsProjectToDetailsProfile(ownerId)
+            findNavController().navigate(action)
+        }
 
     }
+    // region 4- get Info to Display
+    private fun displayInfo () {
+        profileViewModel.getOwnerProfilrByUserId(ownerId)
 
+        profileViewModel.fullNameUser.observe(viewLifecycleOwner, { binding!!.nameOfOwnerProject.setText(it) })
+
+    }
+    //endregion
 }
 

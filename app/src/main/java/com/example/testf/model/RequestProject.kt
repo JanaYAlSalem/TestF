@@ -5,4 +5,4 @@ data class RequestProject (val userId : String = "",
                            val jobTitle : String = "",
                            val description : String = "",
                            val reqId : String = "" ,
-                           val stateOfRequest : RequestState = RequestState.WAITING)
+                           var stateOfRequest : RequestState = RequestState.WAITING)

@@ -14,15 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.testf.R
 import com.example.testf.adapter.ItemListAdapter
-import com.example.testf.adapter.ItemListOnProfileAdapter
 import com.example.testf.databinding.FragmentDisplayProfileBinding
-import com.example.testf.model.Profile
-import com.example.testf.model.Project
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
 
@@ -31,16 +23,10 @@ class DisplayProfileFragment : Fragment() {
     private val profileViewModel: ProfileViewModel by viewModels()
     private val projectviewModel: ProjectListViewModel by viewModels()
 
-    val listTest = mutableListOf<Project>(Project("HERE I'm", "DES","Riyadh"))
-
     private var _binding: FragmentDisplayProfileBinding? = null
     private val binding get() = _binding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _binding = FragmentDisplayProfileBinding.inflate(inflater, container, false)
         return binding!!.root
@@ -62,7 +48,7 @@ class DisplayProfileFragment : Fragment() {
         }
 
         binding!!.logoutBtn.setOnClickListener {
-            // displayProfile_to_login
+            // TODO: 1/18/2022 singOut().isSucc -> nav , lodoing image gone
             profileViewModel.singOut()
             findNavController().navigate(R.id.displayProfile_to_login)
 
@@ -73,28 +59,22 @@ class DisplayProfileFragment : Fragment() {
 
         profileViewModel.fullName.observe(viewLifecycleOwner, { binding!!.userFullName.setText(it) })
 
-        val adapter = ItemListOnProfileAdapter()
-//        adapter.submitList(listTest)
+        val adapter = ItemListAdapter("Req")
         binding?.lifecycleOwner = viewLifecycleOwner
         binding?.projectViewModel = projectviewModel
         binding?.itemOfProject?.adapter = adapter
 
-        Log.e("TAG", "onViewCreated: $listTest", )
-        Log.e("TAG", "onViewCreated: ${profileViewModel.currentUserID()}", )
-        Log.e("TAG", "onViewCreated: ${projectviewModel.userId.value}", )
-        Log.e("TAG", "onViewCreated: ${projectviewModel.projectsStateFlow.value}", )
-
         projectviewModel.getProjectInformation(profileViewModel.currentUserID())
 
+        projectviewModel.FunD()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 projectviewModel.projectsUser.collect {
-                        adapter.submitList(it)
+                    adapter.submitList(it)
                 }
             }
         }
-        projectviewModel.FunD()
     }
 
 }

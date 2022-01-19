@@ -35,7 +35,7 @@ class ProjectsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // title page
         (activity as AppCompatActivity).supportActionBar?.title = "Home"
-        val adapter = ItemListAdapter()
+        val adapter = ItemListAdapter("Home")
 
         binding?.lifecycleOwner = viewLifecycleOwner
         binding?.projectViewModel = listviewModel
