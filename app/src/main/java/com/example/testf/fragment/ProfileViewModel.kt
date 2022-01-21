@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel : ViewModel() {
 
-    //   Profile (userId, firstName, cv)
+    // region Profile variables
     private val _fullName = MutableLiveData<String>()
     val fullName: MutableLiveData<String> get() = _fullName
 
@@ -35,28 +35,25 @@ class ProfileViewModel : ViewModel() {
 
     private val _cvUser = MutableLiveData<String>()
     val cvUser: MutableLiveData<String> get() = _cvUser
-
+    //endregion
 
 
     init {
-    getProfilrByUserId()
+        getProfileByUserId()
     }
 
 
-    fun isLogin(): Boolean {
-        val currentUser = Firebase.auth.currentUser
-        if (currentUser != null) {
-            return true
-        } else
-            return false
-    }
-
+    // region Sing Out
     fun singOut() = FirebaseAuth.getInstance().signOut()
+    //endregion
 
+    // region get current user ID
     fun currentUserID(): String = Firebase.auth.currentUser!!.uid
+    //endregion
 
 
-    fun getProfilrByUserId() {
+    // region get profile info by user ID
+    fun getProfileByUserId() {
         val userId = currentUserID()
         viewModelScope.launch {
             Firebase.firestore.collection("profiles").whereEqualTo("userId", userId)
@@ -74,8 +71,10 @@ class ProfileViewModel : ViewModel() {
 
 
     }
+    //endregion
 
-    fun getOwnerProfilrByUserId(userId : String) {
+    // region get owner profile info by user ID
+    fun getOwnerProfileByUserId(userId : String) {
         viewModelScope.launch {
             Firebase.firestore.collection("profiles").whereEqualTo("userId", userId)
                 .get()
@@ -92,6 +91,23 @@ class ProfileViewModel : ViewModel() {
 
 
     }
+    //endregion
+
+    // region get name by user ID
+    fun getName(userId : String) {
+            viewModelScope.launch {
+                Firebase.firestore.collection("profiles").whereEqualTo("userId", userId)
+                    .get()
+                    .addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
+                        if (task.isSuccessful) {
+                            for (documentSnapshot in task.result.documents) {
+                                _fullNameUser.value = documentSnapshot.data?.get("fullName").toString()
+                            }
+                        }
+                    })
+            }
+    }
+    //endregion
 
 
 }

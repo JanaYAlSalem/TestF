@@ -12,7 +12,7 @@
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_details.xml" value="0.264" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_details_profile.xml" value="0.2625" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_details_project.xml" value="0.2625" />
-        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_display_profile.xml" value="0.264" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_display_profile.xml" value="0.2" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_item_of_list.xml" value="0.2625" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_list.xml" value="0.2625" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_login.xml" value="0.264" />
@@ -26,7 +26,11 @@
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_start.xml" value="0.2625" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/fragment_state_dialog.xml" value="0.2625" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/item.xml" value="0.2625" />
-        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/item_list.xml" value="0.6" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/item_adding.xml" value="0.1" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/item_email.xml" value="0.2625" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/item_image.xml" value="0.264" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/item_info.xml" value="0.1875" />
+        <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/item_list.xml" value="0.264" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/item_request.xml" value="0.2625" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/popup_request.xml" value="0.2625" />
         <entry key="..\:/Users/ONE/Desktop/projects/TestF/app/src/main/res/layout/req_item.xml" value="0.2625" />

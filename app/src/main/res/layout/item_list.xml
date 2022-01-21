@@ -100,6 +100,17 @@
                         app:layout_constraintStart_toEndOf="@+id/city"
                         app:layout_constraintTop_toBottomOf="@+id/descriptionOfProject"
                         app:layout_constraintVertical_bias="0.0" />
+
+                    <ImageButton
+                        android:id="@+id/deletBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_baseline_delete_forever_24" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
         </androidx.cardview.widget.CardView>

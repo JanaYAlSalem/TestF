@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.testf.adapter.ItemReqAdapter
 import com.example.testf.databinding.FragmentRequestListBinding
-import com.example.testf.model.RequestProject
 import kotlinx.coroutines.launch
 
 class RequestListFragment : Fragment() {
@@ -22,6 +21,7 @@ class RequestListFragment : Fragment() {
     val binding get() = _binding
 
     private val reqListViewModel: RequestProjectViewModel by viewModels()
+    private val profileViewModel : ProfileViewModel by viewModels()
 
     lateinit var projectName: String
     lateinit var projectID: String
@@ -55,12 +55,15 @@ class RequestListFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = projectName
 
 
-        val adapterReq = ItemReqAdapter(childFragmentManager)
+        val adapterReq = ItemReqAdapter( "ReqList",
+            { reqListViewModel.setRequestStateAccept(it.reqId) },
+            { reqListViewModel.setRequestStateDeclined(it.reqId) })
+
         binding?.lifecycleOwner = viewLifecycleOwner
         binding?.requestProjectViewModel = reqListViewModel
         binding?.itemReqOnRecycle?.adapter = adapterReq
 
-        reqListViewModel.FunD()
+        reqListViewModel.collectGetReqByProjectID()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {

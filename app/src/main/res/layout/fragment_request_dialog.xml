@@ -1,87 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
-    android:layout_height="450dp"
-    tools:context=".fragment.RequestDialogFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="350dp"
+        android:layout_height="450dp"
+        tools:context=".fragment.RequestDialogFragment">
 
 
-    <!-- region requestForm Title-->
-    <TextView
-        android:id="@+id/requestForm"
-        android:layout_width="143dp"
-        android:layout_height="29dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/requestForm"
-        android:textColor="@color/primaryText_01"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <!-- endregion -->
+        <!-- region requestForm Title-->
+        <TextView
+            android:id="@+id/requestForm"
+            android:layout_width="143dp"
+            android:layout_height="29dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/requestForm"
+            android:textColor="@color/primaryText_01"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!-- endregion -->
 
-    <!-- region Title Of Job-->
-    <EditText
-        android:id="@+id/titleOfJob"
-        android:layout_width="323dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="40dp"
-        android:ems="10"
-        android:hint="ADD"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/requestForm" />
-    <!-- endregion -->
+        <!-- region Title Of Job-->
+        <EditText
+            android:id="@+id/titleOfJob"
+            android:layout_width="323dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:hint="ADD"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/requestForm" />
+        <!-- endregion -->
 
-    <!-- region describe Of Job-->
-    <EditText
-        android:id="@+id/describeOfJob"
-        android:layout_width="320dp"
-        android:layout_height="105dp"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="DES"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleOfJob" />
-    <!-- endregion -->
+        <!-- region describe Of Job-->
+        <EditText
+            android:id="@+id/describeOfJob"
+            android:layout_width="320dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="48dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="DES"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleOfJob" />
+        <!-- endregion -->
 
 
-    <!-- region makeReq Button-->
-    <Button
-        android:id="@+id/makeReq"
-        android:layout_width="109dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginBottom="48dp"
-        android:text="@string/makeReq"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.854"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/describeOfJob" />
-    <!-- endregion -->
+        <!-- region makeReq Button-->
+        <Button
+            android:id="@+id/makeReq"
+            android:layout_width="109dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginBottom="48dp"
+            android:text="@string/makeReq"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.854"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/describeOfJob" />
+        <!-- endregion -->
 
-    <!-- region cancel Button-->
-    <Button
-        android:id="@+id/cancel_btn"
-        android:layout_width="109dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginBottom="48dp"
-        android:text="@string/cancel_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.228"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/describeOfJob"
-        app:layout_constraintVertical_bias="1.0" />
-    <!-- endregion -->
+        <!-- region cancel Button-->
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="109dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginBottom="48dp"
+            android:text="@string/cancel_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.228"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/describeOfJob"
+            app:layout_constraintVertical_bias="1.0" />
+        <!-- endregion -->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

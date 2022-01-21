@@ -1,27 +1,27 @@
 <resources>
-    <string name="app_name">TestF</string>
+    <string name="app_name" translatable="false">TestF</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="moreInfo">More Info</string>
     <string name="city">Riyadh</string>
     <string name="title">App developer</string>
     <string name="info">Improve our overall application and continuously find ways to advance our apps</string>
-    <string name="hint"></string>
+    <string name="hint" translatable="false"></string>
     <string name="home">home</string>
     <string name="person">person</string>
     <string name="identity">identity</string>
     <string name="add">add</string>
-    <string name="email">Email</string>
-    <string name="bio">I’m a software engineer in Riyadh, SA with a passion for computer science, electrical engineering, and embedded systems technology.</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="bio" translatable="false">I’m a software engineer in Riyadh, SA with a passion for computer science, electrical engineering, and embedded systems technology.</string>
     <string-array name="Select_a_city">
         <item>Riyadh,SA</item>
         <item>Dammam,SA</item>
         <item>Jeddah,SA</item>
     </string-array>
     <string name="edit">Edit</string>
-    <string name="dark_theme_preference_value">dark_theme</string>
-    <string name="light_theme_preference_value">Light_theme</string>
-    <string name="system_theme_preference_value">defualt</string>
+    <string name="dark_theme_preference_value" translatable="false">dark_theme</string>
+    <string name="light_theme_preference_value" translatable="false">Light_theme</string>
+    <string name="system_theme_preference_value" translatable="false">defualt</string>
     <string name="logout">LogOut</string>
     <string name="profile">Profile</string>
     <string name="profileinfo">Update Profile</string>
@@ -39,5 +39,7 @@
     <string name="homePage">Home</string>
     <string name="project_details">Project Details</string>
     <string name="cancel_btn">Cancel</string>
+    <string name="hintName">Your Name</string>
+    <string name="majoringOfUser">Your Majoring</string>
 
 </resources>

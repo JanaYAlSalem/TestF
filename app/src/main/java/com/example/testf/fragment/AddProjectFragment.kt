@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.testf.R
 import com.example.testf.databinding.FragmentAddProjectBinding
 import com.example.testf.model.Project
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -33,6 +34,7 @@ class AddProjectFragment : Fragment() {
         val arrayAdapter= ArrayAdapter(requireContext(),R.layout.dropdown_item, citys)
         binding?.autoCompleteTextView?.setAdapter(arrayAdapter)
     }
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -64,7 +66,7 @@ class AddProjectFragment : Fragment() {
     // region 1- check User IsLogin
     private fun checkUserIsLogin() {
 
-        if (profileViewModel.isLogin() == false) {
+        if (isLogin() == false) {
             findNavController().navigate(R.id.addProject_to_login)
             Toast.makeText(this.requireContext(), "You Should be login first", Toast.LENGTH_SHORT)
                 .show()
@@ -131,5 +133,13 @@ class AddProjectFragment : Fragment() {
 
     }
     //endregion
+
+    fun isLogin(): Boolean {
+        val currentUser = Firebase.auth.currentUser
+        if (currentUser != null) {
+            return true
+        } else
+            return false
+    }
 
 }

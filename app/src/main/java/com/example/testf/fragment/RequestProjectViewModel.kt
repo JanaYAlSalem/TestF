@@ -29,6 +29,10 @@ class RequestProjectViewModel : ViewModel() {
     private val _requestProjectStateFlow = MutableStateFlow<List<RequestProject?>>(emptyList())
     val requestProjectStateFlow: StateFlow<List<RequestProject?>> = _requestProjectStateFlow.asStateFlow()
 
+    // RequestProject (reqId,userId,projectId,jobTitle,description,stateOfRequest)
+    private val _requestProjectAcceptStateFlow = MutableStateFlow<List<RequestProject?>>(emptyList())
+    val requestProjectAcceptStateFlow: StateFlow<List<RequestProject?>> = _requestProjectAcceptStateFlow.asStateFlow()
+
 
     private val _reqId = MutableLiveData<String>()
     val reqId: MutableLiveData<String> get() = _reqId
@@ -48,7 +52,9 @@ class RequestProjectViewModel : ViewModel() {
     private val _stateOfRequest = MutableLiveData<RequestState>()
     val stateOfRequest: MutableLiveData<RequestState> get() = _stateOfRequest
 
-
+init {
+    getAllReqAcceptByProjectId()
+}
     fun makeReq(reqItem: RequestProject) {
         requestCollectionRef.add(reqItem)
             .addOnCompleteListener { task ->
@@ -79,7 +85,7 @@ class RequestProjectViewModel : ViewModel() {
         requestCollectionRef.document(documentId)
             .update(reqState)
             .addOnCompleteListener {
-                // add req
+//                 add req
 //                addReq(reqItem, reqItem.projectId)
 
             }
@@ -93,8 +99,8 @@ class RequestProjectViewModel : ViewModel() {
         requestCollectionRef.document(documentId)
             .update(reqState)
             .addOnCompleteListener {
-                // add req
-//                addReq(reqItem, reqItem.projectId)
+                // delete req
+                deleteReq(documentId)
 
             }
 
@@ -131,11 +137,36 @@ class RequestProjectViewModel : ViewModel() {
                     }
                 })
         }
-
-
     }
 
-    private suspend fun FunC(): Flow<List<RequestProject>> = callbackFlow {
+    fun getAllReqAcceptByProjectId() {
+        viewModelScope.launch {
+            requestCollectionRef.whereEqualTo("projectId", _projectId.value).whereEqualTo("stateOfRequest","ACCEPT")
+                .get()
+                .addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
+                    if (task.isSuccessful) {
+                        for (documentSnapshot in task.result.documents) {
+                            _reqId.value = documentSnapshot.data?.get("reqId").toString()
+                            _userId.value = documentSnapshot.data?.get("userId").toString()
+                            _jobTitle.value = documentSnapshot.data?.get("jobTitle").toString()
+                            _description.value = documentSnapshot.data?.get("description").toString()
+                            _stateOfRequest.value = setValueOfState(documentSnapshot.data?.get("stateOfRequest").toString())
+
+                            Log.e("LLLL", "getAllReqAcceptByProjectId: ${_description.value} and ${_jobTitle.value}", )
+
+                        }
+                    }
+                })
+        }
+    }
+
+    private fun deleteReq (reqid: String) {
+        requestCollectionRef.document(reqid).delete()
+            .addOnCompleteListener {
+            }
+    }
+
+    private suspend fun getReqByProjectID(): Flow<List<RequestProject>> = callbackFlow {
         val fireBaseDb = FirebaseFirestore.getInstance()
 
         fireBaseDb.collection("requests").whereEqualTo("projectId", _projectId.value)
@@ -165,9 +196,9 @@ class RequestProjectViewModel : ViewModel() {
         }
     }
 
-    fun FunD() {
+    fun collectGetReqByProjectID() {
         viewModelScope.launch {
-            FunC().collect { list ->
+            getReqByProjectID().collect { list ->
                 Log.e("TAG", "FunD: $list")
                 _requestProjectStateFlow.update { list }
             }
@@ -176,6 +207,47 @@ class RequestProjectViewModel : ViewModel() {
 
     }
 
+
+    private suspend fun getReqAcceptByProjectID(): Flow<List<RequestProject>> = callbackFlow {
+        val fireBaseDb = FirebaseFirestore.getInstance()
+
+        fireBaseDb.collection("requests").whereEqualTo("projectId", _projectId.value).whereEqualTo("stateOfRequest","ACCEPT")
+            .addSnapshotListener { snapshot, exception ->
+                if (exception != null) {
+                    return@addSnapshotListener
+                }
+                var list = mutableListOf<RequestProject>()
+                snapshot?.documents?.forEach {
+                    if (it.exists()) {
+                        val reqList = it.toObject(RequestProject::class.java)
+                        Log.e("TAG", "FunC: $reqList")
+                        list.add(reqList!!)
+                    } else {
+                    }
+
+                }
+
+
+                trySend(list)
+
+
+            }
+
+        awaitClose {
+
+        }
+    }
+
+    fun collectGetReqAcceptByProjectID() {
+        viewModelScope.launch {
+            getReqAcceptByProjectID().collect { list ->
+                Log.e("TAG", "FunD: $list")
+                _requestProjectAcceptStateFlow.update { list }
+            }
+
+        }
+
+    }
 
 
     private fun setValueOfState(state: String): RequestState {

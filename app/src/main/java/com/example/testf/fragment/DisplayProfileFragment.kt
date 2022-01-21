@@ -26,6 +26,11 @@ class DisplayProfileFragment : Fragment() {
     private var _binding: FragmentDisplayProfileBinding? = null
     private val binding get() = _binding
 
+//    private var _bindingitem: FragmentDisplayProfileBinding? = null
+//    private val binding get() = _binding
+
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _binding = FragmentDisplayProfileBinding.inflate(inflater, container, false)
@@ -47,7 +52,8 @@ class DisplayProfileFragment : Fragment() {
 
         }
 
-        binding!!.logoutBtn.setOnClickListener {
+        // logout
+        binding!!.theButton.setOnClickListener {
             // TODO: 1/18/2022 singOut().isSucc -> nav , lodoing image gone
             profileViewModel.singOut()
             findNavController().navigate(R.id.displayProfile_to_login)
@@ -55,18 +61,20 @@ class DisplayProfileFragment : Fragment() {
         }
 
         //onViewCreated
-        profileViewModel.cv.observe(viewLifecycleOwner, { binding!!.bioInfo.setText(it) })
-
         profileViewModel.fullName.observe(viewLifecycleOwner, { binding!!.userFullName.setText(it) })
 
-        val adapter = ItemListAdapter("Req")
-        binding?.lifecycleOwner = viewLifecycleOwner
-        binding?.projectViewModel = projectviewModel
+        profileViewModel.cv.observe(viewLifecycleOwner, { binding!!.bioInfo.setText(it) })
+
+        profileViewModel.majoringOfUser.observe(viewLifecycleOwner,{binding!!.bioTitle.setText(it)})
+
+        val adapter = ItemListAdapter("Req",{projectviewModel.deleteReq(it.projectId)})
+//        binding?.lifecycleOwner = viewLifecycleOwner
+//        binding?.projectViewModel = projectviewModel
         binding?.itemOfProject?.adapter = adapter
 
-        projectviewModel.getProjectInformation(profileViewModel.currentUserID())
+        projectviewModel.getUserProjectInformation(profileViewModel.currentUserID()!!)
 
-        projectviewModel.FunD()
+        projectviewModel.collectGetProjectsUser()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {

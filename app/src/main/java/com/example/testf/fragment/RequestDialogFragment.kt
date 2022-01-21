@@ -85,7 +85,7 @@ class RequestDialogFragment(var projectDocumentId: String) : DialogFragment() {
 
 
         // RequestProject (userId, projectId,jobTitle,description,reqId,stateOfRequest)
-        return RequestProject(userId, projectDocumentId, jobTitle, describeOfJob)
+        return RequestProject(userId!!, projectDocumentId, jobTitle, describeOfJob)
     }
     //endregion
 

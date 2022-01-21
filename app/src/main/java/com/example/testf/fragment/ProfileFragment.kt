@@ -82,12 +82,11 @@ class ProfileFragment : Fragment() {
 
         val userId = profileViewModel.currentUserID()
         val firstName = binding!!.firstNameProfile.text.toString()
-        val lastName = binding!!.lastNameProfile.text.toString()
         val Majoring = binding!!.majoringOfUser.text.toString()
         val cv = binding!!.cvProfile.text.toString()
 
         //   val project = Project(Id ,fullName, Majoring , cv)
-        return Profile(userId, "$firstName $lastName",Majoring, cv)
+        return Profile(userId!!, firstName,Majoring, cv)
     }
     //endregion
 

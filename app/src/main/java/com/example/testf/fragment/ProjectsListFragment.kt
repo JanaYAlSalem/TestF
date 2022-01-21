@@ -35,7 +35,7 @@ class ProjectsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // title page
         (activity as AppCompatActivity).supportActionBar?.title = "Home"
-        val adapter = ItemListAdapter("Home")
+        val adapter = ItemListAdapter("Home",{})
 
         binding?.lifecycleOwner = viewLifecycleOwner
         binding?.projectViewModel = listviewModel
@@ -51,7 +51,7 @@ class ProjectsListFragment : Fragment() {
                 }
             }
         }
-        listviewModel.FunB()
+        listviewModel.collectGetAllProject()
     }
 
 

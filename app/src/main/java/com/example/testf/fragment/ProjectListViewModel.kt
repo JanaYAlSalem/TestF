@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 
 class ProjectListViewModel : ViewModel() {
 
+    // region Project variables
     private val _projectsStateFlow = MutableStateFlow<List<Project?>>(emptyList())
     val projectsStateFlow: StateFlow<List<Project?>> = _projectsStateFlow.asStateFlow()
 
@@ -27,27 +28,34 @@ class ProjectListViewModel : ViewModel() {
     private var _title = MutableLiveData<String>()
     val title: MutableLiveData<String> get() = _title
 
-
     private var _description = MutableLiveData<String>()
     val description: MutableLiveData<String> get() = _description
-
 
     private var _location = MutableLiveData<String>()
     val location: MutableLiveData<String> get() = _location
 
-
     private var _userId = MutableLiveData<String>()
     val userId: MutableLiveData<String> get() = _userId
 
-    //projectId
     private var _projectId = MutableLiveData<String>()
     val projectId: MutableLiveData<String> get() = _projectId
 
     private var _listRequestProject = MutableLiveData<List<RequestProject>?>()
     val listRequestProject: MutableLiveData<List<RequestProject>?> get() = _listRequestProject
+    //endregion
 
 
-    private suspend fun FunA(): Flow<List<Project>> = callbackFlow {
+    // region Delete request by using project ID
+    fun deleteReq(projectID: String) {
+        Firebase.firestore.collection("projects").document(projectID).delete()
+            .addOnCompleteListener {
+            }
+    }
+    //endregion
+
+
+    // region get flow all projects data from data cloud
+    private suspend fun getAllProject(): Flow<List<Project>> = callbackFlow {
         val fireBaseDb = FirebaseFirestore.getInstance()
 
         fireBaseDb.collection("projects")
@@ -55,7 +63,7 @@ class ProjectListViewModel : ViewModel() {
                 if (exception != null) {
                     return@addSnapshotListener
                 }
-                var list = mutableListOf<Project>()
+                val list = mutableListOf<Project>()
                 snapshot?.documents?.forEach {
                     if (it.exists()) {
                         val projectList = it.toObject(Project::class.java)
@@ -76,19 +84,20 @@ class ProjectListViewModel : ViewModel() {
         }
     }
 
-    fun FunB() {
+    fun collectGetAllProject() {
         viewModelScope.launch {
-            FunA().collect { list ->
+            getAllProject().collect { list ->
                 _projectsStateFlow.update { list }
             }
 
         }
 
     }
+    //endregion
 
 
-    // title ,description , location,userId,listRequestProject
-    fun getItemInformation(documentId: String) {
+    // region getProjectItemInformation by using ID
+    fun getProjectItemInformation(documentId: String) {
         viewModelScope.launch {
             Firebase.firestore.collection("projects").whereEqualTo("projectId", documentId)
                 .get()
@@ -96,7 +105,8 @@ class ProjectListViewModel : ViewModel() {
                     if (task.isSuccessful) {
                         for (documentSnapshot in task.result.documents) {
                             _title.value = documentSnapshot.data?.get("title").toString()
-                            _description.value = documentSnapshot.data?.get("description").toString()
+                            _description.value =
+                                documentSnapshot.data?.get("description").toString()
                             _location.value = documentSnapshot.data?.get("location").toString()
                             _userId.value = documentSnapshot.data?.get("userId").toString()
                             _projectId.value = documentSnapshot.data?.get("projectId").toString()
@@ -105,10 +115,11 @@ class ProjectListViewModel : ViewModel() {
                 })
         }
     }
+    //endregion
 
 
-    // title ,description , location,userId,listRequestProject
-    fun getProjectInformation(userId: String): List<Project?> {
+    // region getUserProjectInformation by using ID
+    fun getUserProjectInformation(userId: String): List<Project?> {
         viewModelScope.launch {
             Firebase.firestore.collection("projects").whereEqualTo("userId", userId)
                 .get()
@@ -116,33 +127,36 @@ class ProjectListViewModel : ViewModel() {
                     if (task.isSuccessful) {
                         for (documentSnapshot in task.result.documents) {
                             _title.value = documentSnapshot.data?.get("title").toString()
-                            _description.value = documentSnapshot.data?.get("description").toString()
+                            _description.value =
+                                documentSnapshot.data?.get("description").toString()
                             _location.value = documentSnapshot.data?.get("location").toString()
                             _userId.value = documentSnapshot.data?.get("userId").toString()
                             _projectId.value = documentSnapshot.data?.get("projectId").toString()
-                            _projectsUser.value = mutableListOf(Project(_title.value!!, _description.value!!))
+                            _projectsUser.value =
+                                mutableListOf(Project(_title.value!!, _description.value!!))
                         }
                     }
                 })
         }
 
-        return projectsUser.value!!
+        return projectsUser.value
 
     }
+    //endregion
 
 
-    private suspend fun FunC(): Flow<List<Project>> = callbackFlow {
+    // region get flow projectsUser data from data cloud
+    private suspend fun getProjectsUser(): Flow<List<Project>> = callbackFlow {
         val fireBaseDb = FirebaseFirestore.getInstance()
         val id = Firebase.auth.currentUser!!.uid
         fireBaseDb.collection("projects").whereEqualTo("userId", id)
             .addSnapshotListener { snapshot, exception ->
 
 
-
                 if (exception != null) {
                     return@addSnapshotListener
                 }
-                var list = mutableListOf<Project>()
+                val list = mutableListOf<Project>()
                 snapshot?.documents?.forEach {
 
                     if (it.exists()) {
@@ -159,15 +173,16 @@ class ProjectListViewModel : ViewModel() {
         }
     }
 
-    fun FunD() {
+    fun collectGetProjectsUser() {
         viewModelScope.launch {
-            FunC().collect { list ->
+            getProjectsUser().collect { list ->
                 _projectsUser.update { list }
             }
         }
 
 
     }
+    //endregion
 
 
 }  // end ProjectListViewModel CLASS

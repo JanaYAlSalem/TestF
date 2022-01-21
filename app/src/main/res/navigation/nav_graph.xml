@@ -46,6 +46,9 @@
         <action
             android:id="@+id/addProject_to_login"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/addProjectFragment_to_login"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/projectsListFragment"

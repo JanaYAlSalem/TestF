@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#7986cb</color>
-    <color name="purple_700">#49599a</color>
+    <color name="purple_500">#2596BE</color>
+    <color name="purple_700">#1B87AE</color>
     <color name="teal_200">#9499b7</color>
     <color name="teal_700">#9499b7</color>
     <color name="black">#263238</color>
@@ -18,6 +18,12 @@
     <color name="secondary_03">#f8fdff</color>
     <color name="secondaryText_01">#546e7a</color>
 
+<!--    crad color-->
     <color name="white_dark">#F6F6F6</color>
+
+    <color name="primaryDark_Head">#ED091C69</color>
+    <color name="primaryDark_01">#ED091C69</color>
+    <color name="primaryDark_02">#575B77</color>
+    <color name="primaryTextDark_01">#92383A3C</color>
 
 </resources>

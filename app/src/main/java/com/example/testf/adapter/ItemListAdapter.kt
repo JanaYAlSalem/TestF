@@ -3,6 +3,7 @@ package com.example.testf.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -11,8 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.testf.databinding.ItemListBinding
 import com.example.testf.fragment.*
 import com.example.testf.model.Project
+import com.example.testf.model.RequestProject
 
-class ItemListAdapter (val fragment : String): ListAdapter<Project, ItemListAdapter.ResultsItemViewHolder>(DiffCallback) {
+class ItemListAdapter (val fragment : String, private val onDeleteClicked: (Project) -> Unit,): ListAdapter<Project, ItemListAdapter.ResultsItemViewHolder>(DiffCallback) {
 
     class ResultsItemViewHolder(var binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(ItemOfProject : Project ) {
@@ -33,13 +35,17 @@ class ItemListAdapter (val fragment : String): ListAdapter<Project, ItemListAdap
     } // end DiffCallback Object
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultsItemViewHolder {
-        return ResultsItemViewHolder(ItemListBinding.inflate(LayoutInflater.from(parent.context))
+        return ResultsItemViewHolder(ItemListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         )
     }
 
     override fun onBindViewHolder(holder: ResultsItemViewHolder, position: Int) {
-        if (fragment == "Req")
+        if (fragment == "Req") {
             holder.binding.moreInfo.setText("See Req")
+            holder.binding.deletBtn.isGone = false
+        }
+
+
 
         val listProject = getItem(position)
         holder.bind(listProject)
@@ -48,6 +54,10 @@ class ItemListAdapter (val fragment : String): ListAdapter<Project, ItemListAdap
             holder.moreInfoBtn.findNavController().navigate(action)
 
          //   Log.e("jana", "onBindViewHolder: ${listProject.projectId}", )
+        }
+
+        holder.binding.deletBtn.setOnClickListener {
+            onDeleteClicked(listProject)
         }
 
 

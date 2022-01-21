@@ -56,12 +56,12 @@ class DetailsProfileFragment : Fragment() {
     }
 
     private fun recyclerview() {
-        val adapter = ItemListAdapter("Profile")
+        val adapter = ItemListAdapter("Profile",{})
         binding?.lifecycleOwner = viewLifecycleOwner
         binding?.projectViewModel = projectviewModel
         binding?.itemOfProjectUser?.adapter = adapter
 
-        projectviewModel.getProjectInformation(UserId)
+        projectviewModel.getUserProjectInformation(UserId)
 
 
         lifecycleScope.launch {
@@ -71,15 +71,16 @@ class DetailsProfileFragment : Fragment() {
                 }
             }
         }
-        projectviewModel.FunD()
+        projectviewModel.collectGetProjectsUser()
     }
 
 
     // region 4- get Info to Display
     private fun displayInfo () {
-        profileViewModel.getOwnerProfilrByUserId(UserId)
+        profileViewModel.getOwnerProfileByUserId(UserId)
 
         profileViewModel.fullNameUser.observe(viewLifecycleOwner, { binding!!.userFullName.setText(it) })
+//        profileViewModel.lastNameUser.observe(viewLifecycleOwner, { binding!!.userLastName.setText(it) })
         profileViewModel.cvUser.observe(viewLifecycleOwner, { binding!!.bioInfo.setText(it) })
 
     }
